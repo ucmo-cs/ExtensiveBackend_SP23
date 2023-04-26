@@ -1,0 +1,74 @@
+<head>
+  <title>MoreBoard Teacher</title>
+</head>
+<mat-tab-group [dynamicHeight]="true">
+  <mat-tab label="Message Student">
+    <form (ngSubmit)="sendEmail()">
+      <mat-form-field class="w100">
+        <mat-label>recipients:</mat-label>
+        <div class="flex-row-start">
+          <mat-chip-grid #chipGrid>
+            <mat-chip-row (removed)="remove_chip(student)" *ngFor="let student of recipients">
+              {{student.first_name + ' ' + student.last_name}}
+              <button [attr.aria-label]="'remove ' + student" [disabled]="buttonsDisabled" matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+          <input #studentInput (matChipInputTokenEnd)="add_chip($any($event))" [formControl]="control"
+                 [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [placeholder]="recipients.length > 0 ? '' : 'Search'" matInput type="text">
+        </div>
+      </mat-form-field>
+      <mat-form-field class="w100">
+        <mat-label>subject:</mat-label>
+        <input [(ngModel)]="subject" [placeholder]="'Subject'" matInput name="subject" type="text">
+      </mat-form-field>
+
+      <mat-form-field class="w100">
+        <mat-label>body:</mat-label>
+        <textarea [(ngModel)]="body" cdkAutosizeMinRows="5" cdkTextareaAutosize matInput name="body"></textarea>
+      </mat-form-field>
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" [displayWith]="showName">
+        <mat-option *ngFor="let student of filteredStudents | async" [value]="student">
+          {{student.last_name + ", " + student.first_name}}
+        </mat-option>
+      </mat-autocomplete>
+      <button [disabled]="buttonsDisabled" class="submit-button" mat-raised-button type="submit">Send</button>
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Seating Chart">
+    <div *ngIf="students && students.length > 0" class="chart-card">
+      <div class="room">
+        <div *ngFor="let row of seatArray; let i = index" class="room-col">
+          <div (mouseenter)="hovered = box.student" (mouseleave)="hovered = null" *ngFor="let box of row; let j = index"
+               [class.hover]="hovered !== undefined && box.student === hovered" [matTooltip]="getName(box)"
+               class="room-square">
+            <div (click)="move(box, i, j)" class="square">
+              <mat-icon *ngIf="!!moving && !box.student || !moving && box.student">chair_alt</mat-icon>
+              <mat-icon *ngIf="canSwap(box)">swap_horizontal</mat-icon>
+              <mat-icon *ngIf="moving === box">delete</mat-icon>
+              {{getBox(box)}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="students && students.length > 0" class="chart-name-list">
+        <mat-list>
+          <h2>Students</h2>
+          <mat-list-item (click)="startMove(student)" (mouseenter)=" hovered = student" (mouseleave)="hovered = null"
+                         *ngFor="let student of students" [class.hover]="hovered === student">
+            {{student.last_name}}, {{student.first_name}}
+          </mat-list-item>
+        </mat-list>
+        <button (click)="save()" [disabled]="buttonsDisabled" class="save-button" mat-raised-button>Save</button>
+      </div>
+    </div>
+    <div *ngIf="!students || students.length === 0" class="flex-row-around">
+      This class has no students, and therefore: no seating chart
+    </div>
+  </mat-tab>
+</mat-tab-group>

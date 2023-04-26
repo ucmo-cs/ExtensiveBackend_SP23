@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Create Class</h1>
+<form (ngSubmit)="submit()" class="create-form">
+  <mat-form-field id="ClassName" name="className">
+    <mat-label>Class Name</mat-label>
+    <input [(ngModel)]="className" matInput name="Class Name">
+  </mat-form-field>
+  <mat-form-field id="hour" name="hour">
+    <mat-label>Hour</mat-label>
+    <mat-select [(ngModel)]="classHour" name="hour">
+      <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}} hour</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field id="teacherSelect" name="teacherSelect">
+    <mat-label>Teacher Search</mat-label>
+    <input [(ngModel)]="teacherUser" [formControl]="teacherFilter" [matAutocomplete]="autoTeacher" matInput type="text">
+    <mat-autocomplete #autoTeacher="matAutocomplete" [displayWith]="showTeacher">
+      <mat-option *ngFor="let teacher of filteredTeachers | async" [value]="teacher">
+        {{teacher.first_name}} {{teacher.last_name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field id="roomSelect" name="roomSelect">
+    <mat-label>Room Search</mat-label>
+    <input [(ngModel)]="roomUser" [formControl]="roomFilter" [matAutocomplete]="autoRoom" matInput type="text">
+    <mat-autocomplete #autoRoom="matAutocomplete" [displayWith]="showRoom">
+      <mat-option *ngFor="let room of filteredRooms| async" [value]="room">
+        {{room.room_name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="action-row">
+    <button [disabled]="buttonsDisabled" class="bigger-button" mat-raised-button type="submit">Create Class</button>
+    <button [mat-dialog-close]="false" class="bigger-button" mat-raised-button>Cancel</button>
+  </div>
+</form>

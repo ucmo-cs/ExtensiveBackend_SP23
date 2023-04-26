@@ -1,0 +1,27 @@
+<mat-dialog-content>
+  <div class="centered">
+    <div class="item-row">
+      <mat-form-field class="w85">
+        <mat-icon matIconPrefix>search</mat-icon>
+        <input (ngModelChange)="filterUsers()" [(ngModel)]="selectedUser" class="w65" matInput placeholder="Find Users"
+               type="search">
+      </mat-form-field>
+      <button [mat-dialog-close]="false" class="close" mat-icon-button>
+        <mat-icon>close_circle</mat-icon>
+      </button>
+    </div>
+    <h3 *ngIf="!usersFiltered || usersFiltered.length === 0">All Matching Students Are in the Class</h3>
+    <mat-list *ngIf="usersFiltered && usersFiltered.length > 0" class="w100">
+      <mat-list-item *ngFor="let user of usersFiltered" class="row-spacing">
+        <div class="item-row">
+          <h3 class="w25">{{user.first_name}} {{user.last_name}}</h3>
+          <h4 class="w25">{{user.email}}</h4>
+          <!--      <h4 class="w25">{{user}}</h4>-->
+          <button [matDialogClose]="user" class="add" mat-icon-button matSuffix>
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>

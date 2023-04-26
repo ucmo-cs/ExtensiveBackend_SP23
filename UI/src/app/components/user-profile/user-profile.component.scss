@@ -1,0 +1,49 @@
+.card, .card2 {
+  background-color: var(--card-background);
+  width: 45%;
+  margin: 100px auto;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.card2 {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  align-items: center !important;
+  justify-content: space-between;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+
+.together-align-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.right-column {
+  display: flex;
+  margin-top: 20px;
+  width: 100% !important;
+  flex-direction: column;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.toggle {
+  float: right;
+}
+
+.link-h2 {
+  text-decoration: underline;
+  cursor: pointer;
+}

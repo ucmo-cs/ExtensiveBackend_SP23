@@ -1,0 +1,33 @@
+.item-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+}
+
+.row-spacing:not(:last-child) {
+  width: 100% !important;
+  margin-bottom: 10px !important;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--brown) !important;
+}
+
+.add:hover * {
+  color: var(--add) !important;
+}
+
+.close:hover * {
+  color: red !important;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100% !important;
+  width: 100% !important;
+}

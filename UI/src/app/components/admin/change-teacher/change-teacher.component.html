@@ -1,0 +1,16 @@
+<form (ngSubmit)="submit()" class="create-form">
+  <mat-form-field id="teacherSelect" name="teacherSelect">
+    <mat-label>Teacher Search</mat-label>
+    <input [(ngModel)]="newTeacher" [formControl]="teacherFilter" [matAutocomplete]="autoNewTeacher" matInput
+           type="text">
+    <mat-autocomplete #autoNewTeacher="matAutocomplete" [displayWith]="showTeacher">
+      <mat-option *ngFor="let teacher of filteredTeachers | async" [value]="teacher">
+        {{teacher.first_name}} {{teacher.last_name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="action-row">
+    <button [disabled]="buttonsDisabled" class="bigger-button" mat-raised-button type="submit">Update Teacher</button>
+    <button [mat-dialog-close]="false" class="bigger-button" mat-raised-button>Cancel</button>
+  </div>
+</form>

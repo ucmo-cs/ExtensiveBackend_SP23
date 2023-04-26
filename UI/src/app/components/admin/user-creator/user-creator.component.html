@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Create User</h1>
+<form (ngSubmit)="submit()" class="create-form">
+  <mat-form-field id="firstName" name="firstName">
+    <mat-label>First Name</mat-label>
+    <input [(ngModel)]="firstName" matInput name="First Name" type="text">
+  </mat-form-field>
+  <mat-form-field id="lastName" name="lastName">
+    <mat-label>Last Name</mat-label>
+    <input [(ngModel)]="lastName" matInput name="Last Name" type="text">
+  </mat-form-field>
+  <mat-form-field id="password" name="password">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="password" autocomplete="new-password" matInput name="Password" type="password">
+  </mat-form-field>
+  <mat-form-field id="passwordConfirm" name="passwordConfirm">
+    <mat-label>Confirm Password</mat-label>
+    <input [(ngModel)]="passwordConfirm" autocomplete="new-password" matInput name="Confirm Password" type="password">
+  </mat-form-field>
+  <mat-form-field id="email" name="email">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="email" matInput name="Email" type="email">
+  </mat-form-field>
+  <mat-form-field id="role" name="role">
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="roleSelected" name="hour">
+      <mat-option *ngFor="let role of roles" [value]="role.id">{{role.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="action-row">
+    <button [disabled]="buttonsDisabled" class="bigger-button" mat-raised-button type="submit">Create User</button>
+    <button [mat-dialog-close]="false" class="bigger-button" mat-raised-button>Cancel</button>
+  </div>
+</form>

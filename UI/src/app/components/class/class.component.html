@@ -1,0 +1,30 @@
+<head>
+  <title>MoreBoard Classes</title>
+</head>
+<div class="background-card">
+  <div class="flex-row-between">
+    <span class="flex-row-start">
+      <h1 class="mr10">Classes</h1>
+      <h1 *ngIf="authService.role === 'teacher'"> You Teach</h1>
+      <h1 *ngIf="authService.role === 'student'"> You Attend</h1>
+      <h1 *ngIf="authService.role === 'admin'"> (All)</h1>
+      <h1 *ngIf="authService.role === 'guardian'"> Your Guardianee Attends</h1>
+    </span>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let course of classes_filtered" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="panel-title">
+          <h3>{{course.class_name | titlecase}}</h3>
+        </mat-panel-title>
+        <mat-panel-description class="panel-desc">
+          <!--<span>id: {{course.class_id}}</span>-->
+          <code>Hour: {{course.hour}}</code>
+          <code>Room: {{course.room_name}}</code>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-teacher *ngIf="role!=='student'" [course]="course"></app-teacher>
+      <app-student *ngIf="role==='student'" [course]="course"></app-student>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

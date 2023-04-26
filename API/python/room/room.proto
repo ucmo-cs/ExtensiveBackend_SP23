@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service RoomCall {
+  rpc AddRoom(AddRoomRequest) returns (RoomReply){}
+  rpc RemoveRoom(RemoveRoomRequest) returns (RoomReply){}
+  rpc GetAllRoomInfo(GetAllRoomInfoRequest) returns (RoomReply) {}
+}
+
+message AddRoomRequest {
+  string room_name = 1;
+  int32 room_length = 2;
+  int32 room_width = 3;
+}
+
+message RemoveRoomRequest {
+  int32 room_id = 1;
+}
+
+message GetAllRoomInfoRequest {
+  int32 room_id = 1;
+}
+
+message RoomReply {
+  optional string message = 1;
+  optional string error = 2;
+  int32 status_code = 3;
+}

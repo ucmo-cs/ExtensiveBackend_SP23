@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Create Room</h1>
+<form (ngSubmit)="submit()" class="create-form">
+  <mat-form-field id="roomName" name="roomName">
+    <mat-label>Room Name</mat-label>
+    <input [(ngModel)]="roomName" matInput name="Room Name" type="text">
+  </mat-form-field>
+  <mat-form-field id="width" name="width">
+    <mat-label>Width</mat-label>
+    <input [(ngModel)]="width" matInput name="Width" type="number">
+  </mat-form-field>
+  <mat-form-field id="length" name="length">
+    <mat-label>Length</mat-label>
+    <input [(ngModel)]="length" matInput name="Length" type="number">
+  </mat-form-field>
+  <div class="action-row">
+    <button [disabled]="buttonsDisabled" class="bigger-button" mat-raised-button type="submit">Create Room</button>
+    <button [mat-dialog-close]="false" class="bigger-button" mat-raised-button>Cancel</button>
+  </div>
+</form>

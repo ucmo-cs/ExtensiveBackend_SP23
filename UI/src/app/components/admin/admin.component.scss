@@ -1,0 +1,39 @@
+.admin-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.item-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+}
+
+.row-spacing:not(:last-child) {
+  margin-bottom: 10px !important;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--brown) !important;
+}
+
+.trashcan:hover * {
+  color: red !important;
+}
+
+.add:hover * {
+  color: var(--add) !important;
+}
+
+.mat-button-toggle-group {
+  margin-top: 0 !important;
+  margin-bottom: 5px !important;
+}
+
+.toggle-group {
+  width: auto !important;
+}

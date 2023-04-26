@@ -1,0 +1,14 @@
+<div (mouseenter)="hovered = true" (mouseleave)="hovered=false" class="sidebar-col">
+  <div class="navBar">
+    <div *ngFor="let page of pages">
+      <div [class.active]="active(page.name)" class="sidebar-option" routerLink="{{page.name}}">
+        <mat-icon>{{page.icon}}</mat-icon>
+        <span *ngIf="hovered">{{page.name | titlecase}}</span>
+      </div>
+    </div>
+  </div>
+  <button (click)="appComponent.toggleDarkMode()" mat-icon-button>
+    <mat-icon *ngIf="!appComponent.darkMode">dark_mode</mat-icon>
+    <mat-icon *ngIf="appComponent.darkMode">light_mode</mat-icon>
+  </button>
+</div>

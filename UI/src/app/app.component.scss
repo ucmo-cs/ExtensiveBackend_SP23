@@ -1,0 +1,26 @@
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  border-bottom: 4px solid var(--brown);
+  border-top: 4px solid var(--brown);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--not-background);
+}
+
+.headerTitle {
+  color: white !important;
+  padding-top: 10px;
+}
+
+.navbar {
+  background: var(--not-background);
+  height: 100%;
+}
+
+.active, .active * {
+  color: var(--brown);
+}

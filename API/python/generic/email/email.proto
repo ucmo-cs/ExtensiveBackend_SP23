@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+service EmailCall {
+  rpc EmailUser(EmailUserRequest) returns (EmailUserReply){}
+}
+
+message EmailUserRequest {
+  string email_to = 1;
+  string email_subject = 2;
+  string email_body = 3;
+}
+
+message EmailUserReply {
+  optional string message = 1;
+  optional string error = 2;
+  int32 status_code = 3;
+}

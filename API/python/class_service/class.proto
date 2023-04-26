@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+service ClassCall {
+  rpc AddClass(AddClassRequest) returns (ClassReply){}
+  rpc RemoveClass(RemoveClassRequest) returns (ClassReply){}
+  rpc AddUserToClass(AddUserToClassRequest) returns (ClassReply){}
+  rpc RemoveUserFromClass(RemoveUserFromClassRequest) returns (ClassReply){}
+  rpc GetAllUsersFromClass(GetAllUsersFromClassRequest) returns (ClassReply){}
+  rpc GetAllChairsFromClass(GetAllChairsFromClassRequest) returns (ClassReply){}
+  rpc GetAllClasses(GetAllClassesRequest) returns (ClassReply) {}
+}
+
+message AddClassRequest {
+  string teacher_username = 1;
+  string class_name = 2;
+  int32 hour = 3;
+  int32 room_id = 4;
+}
+
+
+message RemoveClassRequest {
+  int32 class_id = 1;
+}
+
+message AddUserToClassRequest {
+  int32 class_id = 1;
+  int32 user_id = 2;
+}
+
+message RemoveUserFromClassRequest {
+  int32 class_id = 1;
+  int32 user_id = 2;
+}
+
+message GetAllUsersFromClassRequest {
+  int32 class_id = 1;
+}
+
+message GetAllChairsFromClassRequest {
+  int32 class_id = 1;
+}
+
+message GetAllClassesRequest{
+
+}
+
+message ClassReply {
+  optional string message = 1;
+  optional string error = 2;
+  int32 status_code = 3;
+}

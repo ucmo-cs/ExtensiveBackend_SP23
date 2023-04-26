@@ -1,0 +1,52 @@
+<head>
+  <title>MoreBoard Student</title>
+</head>
+<mat-tab-group [dynamicHeight]="true">
+  <mat-tab label="Message Teacher">
+    <form (ngSubmit)="sendEmail()">
+      <mat-label class="w100">to: {{teacher_name}}</mat-label>
+      <mat-form-field class="w100">
+        <mat-label>subject:</mat-label>
+        <input [(ngModel)]="subject" [placeholder]="'Subject'" matInput name="subject" type="text">
+      </mat-form-field>
+
+      <mat-form-field class="w100">
+        <mat-label>body:</mat-label>
+        <textarea [(ngModel)]="body" cdkAutosizeMinRows="5" cdkTextareaAutosize matInput name="body"></textarea>
+      </mat-form-field>
+
+      <button [disabled]="buttonsDisabled" class="submit-button" mat-raised-button type="submit">Send</button>
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Seating Chart">
+    <div class="chart-card">
+      <div class="room">
+        <div *ngFor="let row of seatArray; let i = index" class="room-col">
+          <div (mouseenter)="hover(box)" (mouseleave)="unhover()" *ngFor="let box of row; let j = index"
+               [class.hover]="box === hovered && hovered !== nbsp" class="room-square"
+               matTooltip="{{box.first_name}} {{box.last_name}}">
+            <div *ngIf="box.last_name === undefined" class="square">
+              {{nbsp}}
+              <mat-icon *ngIf="!!moving">chair_alt</mat-icon>
+            </div>
+            <span *ngIf="box.last_name !== undefined"
+                  class="square">
+              {{box.first_name.at(0)}}.{{box.last_name.slice(0, 3)}}
+              <mat-icon *ngIf="!moving">chair_alt</mat-icon>
+              <mat-icon *ngIf="!!moving && moving !== box && !noSwap" class="green">swap_horizontal</mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-name-list">
+        <mat-list>
+          <mat-list-item (mouseenter)="hover(student)" (mouseleave)="unhover()" *ngFor="let student of students"
+                         [class.hover]="hovered === student">
+            {{student.last_name}},{{student.first_name}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

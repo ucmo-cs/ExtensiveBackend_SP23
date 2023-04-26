@@ -1,0 +1,26 @@
+<head>
+  <title>MoreBoard Profile</title>
+</head>
+<div *ngIf="!signedIn" class="card">
+  <div class="std-column">
+    <h1>Sign In</h1>
+    <form class="right-column">
+      <mat-form-field class="wide-form">
+        <input [(ngModel)]="username" autocomplete="username" matInput name="username" placeholder="Username">
+      </mat-form-field>
+      <mat-form-field class="wide-form">
+        <input [(ngModel)]="password" autocomplete="current-password" matInput name="password" placeholder="Password"
+               type="password">
+      </mat-form-field>
+      <button (click)="submit()" [disabled]="buttonsDisabled" class="mt10 bigger-button" mat-raised-button>Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="signedIn" class="card2">
+  <h1>Welcome {{username}}</h1>
+  <button (click)="signOut()" mat-raised-button>Sign Out</button>
+</div>
+
+<!-- -->

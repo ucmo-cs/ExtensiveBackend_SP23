@@ -1,0 +1,26 @@
+<head>
+  <title>MoreBoard Buildings</title>
+</head>
+<div class="background-card">
+  <div class="flex-row-between">
+    <button (click)="goBack()" *ngIf="buildingSelected !== SEL_BUILDING" mat-icon-button routerLink="/buildings">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{getLocation(buildingSelected)}}</h1>
+    <mat-button-toggle-group [(ngModel)]="buildingSelected" class="btn-group" role="group">
+      <mat-button-toggle *ngFor="let building of buildings" [value]="building"
+                         routerLink="/buildings/{{building}}">{{getLocation(building)}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <hr>
+  <div *ngIf="buildingSelected === SEL_BUILDING" class="flex-row-between">
+    <p>
+      The University of Central Missouri transforms students into lifelong learners, dedicated to service, with the
+      knowledge, skills and confidence to succeed and lead in the region, state, nation and world. Our 150-acre main
+      campus is located in Warrensburg, with our extended campus, UCM-Lee’s Summit, located at the Missouri Innovation
+      Campus in Lee’s Summit, Mo. UCM offers 150 programs of baccalaureate and master’s degree study with outstanding,
+      experienced faculty, and opportunity for study around the world.
+    </p>
+    <img alt="Map of UCM" src="../assets/map.png" width="50%">
+  </div>
+</div>

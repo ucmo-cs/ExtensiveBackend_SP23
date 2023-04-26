@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  shell: cmd.exe
+  variables:
+    PUBLIC_IP: "136.34.239.66"
+    PRIVATE_IP: "192.168.86.72"
+    DB_USER: "api"
+    DB_PASS: "o68aUqB6gegAyDd"
+    TREY_UCM_DB_PASS: "rigQEzhsWfgQxY4"
+    MOREBOARD_EMAIL: "moreboarddonotreply@gmail.com"
+    EMAIL_PASSWORD: "sikszemnazdikdii"
+
+phases:
+  install:
+    commands:
+      - cd python
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - cd working_files
+      - python main.py

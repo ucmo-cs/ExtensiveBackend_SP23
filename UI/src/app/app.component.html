@@ -1,0 +1,19 @@
+<div class="header">
+  <img alt="MoreBoard Logo" height="70px" src="../assets/headerLogo.png" width="80px"/>
+  <h1 class="headerTitle">moreboard.</h1>
+  <button [class.active]="signInActive()" class="mr10" mat-raised-button routerLink="profile">
+    <span class="mr10">{{username || "Sign In"}}</span>
+    <mat-icon>
+      account_circle
+    </mat-icon>
+  </button>
+</div>
+<mat-sidenav-container class="main-content">
+  <mat-sidenav class="navbar" disableClose mode="push" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <mat-spinner *ngIf="spinner || snackbar.spinner" class="spinner-center"></mat-spinner>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

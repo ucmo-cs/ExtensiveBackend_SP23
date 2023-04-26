@@ -1,0 +1,118 @@
+<head>
+  <title>MoreBoard Admin</title>
+</head>
+<div class="background-card">
+  <h1>Admin Tools</h1>
+  <mat-tab-group [dynamicHeight]="true">
+    <mat-tab class="admin-tab" label="Classes">
+      <mat-form-field class="w100">
+        <input (ngModelChange)="filterClasses()" [(ngModel)]="selectedClass" matInput placeholder="Find Classes"
+               type="search">
+        <mat-icon matIconPrefix>search</mat-icon>
+        <button (click)="openClassPopup()" [disabled]="buttonsDisabled" class="add" mat-icon-button matSuffix>
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-accordion>
+        <mat-expansion-panel (afterExpand)="getStudents(course.class_id)" *ngFor="let course of classesFiltered"
+                             class="row-spacing">
+          <mat-expansion-panel-header>
+            <div class="item-row">
+              <h3 class="w35">{{course.class_name}}</h3>
+              <h4 class="w25 flex-row-start">Prof: {{getTeacher(course.teacher_id)}}
+                <button (click)="editTeacherPopup(course)" [disabled]="buttonsDisabled" class="add" mat-icon-button
+                        matSuffix>
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </h4>
+              <h4 class="w15">Room: {{getRoom(course.room_id)}}</h4>
+              <h4 class="w15">Hour: {{course.hour}}</h4>
+              <button (click)="deleteClass(course.class_id)" [disabled]="buttonsDisabled" class="trashcan"
+                      mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-expansion-panel-header>
+          <hr>
+          <div class="item-row">
+            <h3 *ngIf="!studentsInClass || studentsInClass.length === 0">Empty Class</h3>
+            <h3 *ngIf="studentsInClass && studentsInClass.length > 0">Students In Class</h3>
+            <button (click)="openStudentAddPopup(course.class_id)" [disabled]="buttonsDisabled" class="add"
+                    mat-icon-button matSuffix>
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+          <mat-list *ngIf="studentsInClass && studentsInClass.length > 0">
+            <div *ngFor="let student of studentsInClass" class="dashed">
+              <mat-list-item>
+                <div class="item-row">
+                  <h3>{{student.first_name}} {{student.last_name}}</h3>
+                  <button (click)="removeStudentFromClass(course.class_id, student.user_id)"
+                          [disabled]="buttonsDisabled" class="trashcan"
+                          mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </mat-list-item>
+            </div>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-tab>
+
+    <mat-tab class="admin-tab" label="Users">
+      <div class="item-row">
+        <mat-form-field class="w100">
+          <mat-icon matIconPrefix>search</mat-icon>
+          <div class="item-row">
+            <input (ngModelChange)="filterUsers()" [(ngModel)]="selectedUser" class="w65" matInput
+                   placeholder="Find Users" type="search">
+            <mat-button-toggle-group (ngModelChange)="filterUsers()" [(ngModel)]="userType" class="toggle-group">
+              <mat-button-toggle [value]="3">Admins</mat-button-toggle>
+              <mat-button-toggle [value]="2">Teachers</mat-button-toggle>
+              <mat-button-toggle [value]="0">Students</mat-button-toggle>
+              <mat-button-toggle [value]="'All'">All</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <button (click)="openUserPopup()" [disabled]="buttonsDisabled" class="add" mat-icon-button matSuffix>
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <mat-list>
+        <mat-list-item *ngFor="let user of usersFiltered" class="row-spacing">
+          <div class="item-row">
+            <h3 class="w25">{{user.first_name}} {{user.last_name}}</h3>
+            <h4 class="w25">{{getRole(user.role_id)}}</h4>
+            <h4 class="w25">{{user.email}}</h4>
+            <button (click)="deleteUser(user.user_id)" [disabled]="buttonsDisabled" class="trashcan" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
+
+    <mat-tab class="admin-tab" label="Rooms">
+      <mat-form-field class="w100">
+        <input (ngModelChange)="filterRooms()" [(ngModel)]="selectedRoom" matInput placeholder="Find Rooms"
+               type="search">
+        <mat-icon matIconPrefix>search</mat-icon>
+        <button (click)="openRoomPopup()" [disabled]="buttonsDisabled" class="add" mat-icon-button matSuffix>
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-list>
+        <mat-list-item *ngFor="let room of roomsFiltered" class="row-spacing">
+          <div class="item-row">
+            <h3 class="w25">{{room.room_name}}</h3>
+            <h4 class="w25">{{room.room_width}} x {{room.room_length}}</h4>
+            <button (click)="deleteRoom(room.room_id)" [disabled]="buttonsDisabled" class="trashcan" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
+  </mat-tab-group>
+</div>
